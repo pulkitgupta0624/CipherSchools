@@ -222,25 +222,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 👥 Authors
-
-Your name and project contributors
-
-## 🙏 Acknowledgments
-
-- Monaco Editor by Microsoft
-- Sandpack by CodeSandbox
-- React community
-- All open source contributors
-
-## 📞 Support
-
-For support, email your-email@example.com or create an issue in the repository.
-
----
-
-**Made with ❤️ by the CipherStudio team**
