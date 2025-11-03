@@ -39,10 +39,10 @@ const fileSchema = new mongoose.Schema({
     //   return this.type === 'file' && !this.s3Key;
     // }
   },
-  s3Key: {
-    type: String,
-    sparse: true
-  },
+  // s3Key: {
+  //   type: String,
+  //   sparse: true
+  // },
   language: {
     type: String,
     enum: ['javascript', 'jsx', 'css', 'html', 'json', 'markdown'],

@@ -1,6 +1,6 @@
 const Project = require('../models/Project');
 const File = require('../models/File');
-const { s3 } = require('../config/aws');
+// const { s3 } = require('../config/aws');
 const { createDefaultFiles } = require('../utils/projectHelpers');
 
 // @desc    Create new project
@@ -180,14 +180,14 @@ const deleteProject = async (req, res, next) => {
 
     // Delete all files from S3
     const files = await File.find({ projectId: id, type: 'file' });
-    for (const file of files) {
-      if (file.s3Key) {
-        await s3.deleteObject({
-          Bucket: process.env.AWS_S3_BUCKET,
-          Key: file.s3Key
-        }).promise();
-      }
-    }
+    // for (const file of files) {
+    //   if (file.s3Key) {
+    //     await s3.deleteObject({
+    //       Bucket: process.env.AWS_S3_BUCKET,
+    //       Key: file.s3Key
+    //     }).promise();
+    //   }
+    // }
 
     // Delete all files from database
     await File.deleteMany({ projectId: id });

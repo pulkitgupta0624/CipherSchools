@@ -1,6 +1,6 @@
 const File = require('../models/File');
 const Project = require('../models/Project');
-const { s3 } = require('../config/aws');
+// const { s3 } = require('../config/aws');
 
 // @desc    Create file or folder
 // @route   POST /api/files
@@ -86,15 +86,15 @@ const getFile = async (req, res, next) => {
     }
 
     // If file is stored in S3, get it from there
-    if (file.s3Key) {
-      const params = {
-        Bucket: process.env.AWS_S3_BUCKET,
-        Key: file.s3Key
-      };
+    // if (file.s3Key) {
+    //   const params = {
+    //     Bucket: process.env.AWS_S3_BUCKET,
+    //     Key: file.s3Key
+    //   };
 
-      const data = await s3.getObject(params).promise();
-      file.content = data.Body.toString('utf-8');
-    }
+    //   const data = await s3.getObject(params).promise();
+    //   file.content = data.Body.toString('utf-8');
+    // }
 
     res.status(200).json({
       success: true,
@@ -141,13 +141,13 @@ const updateFile = async (req, res, next) => {
       file.content = content;
       
       // If file is in S3, update it
-      if (file.s3Key) {
-        await s3.putObject({
-          Bucket: process.env.AWS_S3_BUCKET,
-          Key: file.s3Key,
-          Body: content
-        }).promise();
-      }
+      // if (file.s3Key) {
+      //   await s3.putObject({
+      //     Bucket: process.env.AWS_S3_BUCKET,
+      //     Key: file.s3Key,
+      //     Body: content
+      //   }).promise();
+      // }
     }
 
     await file.save();
@@ -188,12 +188,12 @@ const deleteFile = async (req, res, next) => {
     }
 
     // If file is in S3, delete it
-    if (file.s3Key) {
-      await s3.deleteObject({
-        Bucket: process.env.AWS_S3_BUCKET,
-        Key: file.s3Key
-      }).promise();
-    }
+    // if (file.s3Key) {
+    //   await s3.deleteObject({
+    //     Bucket: process.env.AWS_S3_BUCKET,
+    //     Key: file.s3Key
+    //   }).promise();
+    // }
 
     // Soft delete
     file.isDeleted = true;
@@ -275,12 +275,12 @@ async function deleteChildrenRecursively(parentId) {
       await deleteChildrenRecursively(child._id);
     }
     
-    if (child.s3Key) {
-      await s3.deleteObject({
-        Bucket: process.env.AWS_S3_BUCKET,
-        Key: child.s3Key
-      }).promise();
-    }
+    // if (child.s3Key) {
+    //   await s3.deleteObject({
+    //     Bucket: process.env.AWS_S3_BUCKET,
+    //     Key: child.s3Key
+    //   }).promise();
+    // }
     
     child.isDeleted = true;
     await child.save();
